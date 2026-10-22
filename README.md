@@ -39,11 +39,9 @@
 
 ## 2. Lojas (`stores`)
 
-- [ ] `POST /stores` — Criar loja
-- [ ] `GET /stores` — Listar lojas
-- [ ] `GET /stores/:id` — Buscar loja por ID
+- [x] `POST /stores` — Criar loja
+- [x] `GET /stores` — Listar lojas
 - [ ] `PATCH /stores/:id` — Atualizar loja
-- [ ] `DELETE /stores/:id` — Excluir loja
 
 ---
 
