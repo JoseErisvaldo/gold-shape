@@ -28,3 +28,102 @@ model User {
 
   @@map("users")
 }
+
+model Store {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @db.VarChar(150)
+  slug      String   @unique @db.VarChar(160)
+  whatsapp  String   @db.VarChar(20)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  categories    Category[]
+  products      Product[]
+  deliveryAreas DeliveryArea[]
+
+  @@map("stores")
+}
+
+model Category {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  storeId     String   @map("store_id") @db.Uuid
+  name        String   @db.VarChar(100)
+  slug        String   @db.VarChar(120)
+  description String?
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  store            Store            @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  productCategories ProductCategory[]
+
+  @@unique([storeId, slug])
+  @@map("categories")
+}
+
+model Product {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  storeId     String   @map("store_id") @db.Uuid
+  name        String   @db.VarChar(180)
+  description String?
+  brand       String?  @db.VarChar(120)
+  imageUrl    String?  @map("image_url")
+  active      Boolean  @default(true)
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  store      Store             @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  categories ProductCategory[]
+  variants   ProductVariant[]
+
+  @@index([storeId, active])
+  @@map("products")
+}
+
+model ProductCategory {
+  productId  String   @map("product_id") @db.Uuid
+  categoryId String   @map("category_id") @db.Uuid
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([productId, categoryId])
+  @@map("product_categories")
+}
+
+model ProductVariant {
+  id                 String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  productId          String   @map("product_id") @db.Uuid
+  sku                String   @db.VarChar(80)
+  size               String?  @db.VarChar(80)
+  flavor             String?  @db.VarChar(100)
+  price              Decimal  @db.Decimal(12, 2)
+  discountPercentage Decimal? @map("discount_percentage") @db.Decimal(5, 2)
+  stockQuantity      Int?     @map("stock_quantity")
+  active             Boolean  @default(true)
+  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt          DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, sku])
+  @@map("product_variants")
+}
+
+model DeliveryArea {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  storeId      String   @map("store_id") @db.Uuid
+  city         String   @db.VarChar(120)
+  state        String   @db.Char(2)
+  neighborhood String   @db.VarChar(120)
+  shippingFee  Decimal  @map("shipping_fee") @db.Decimal(12, 2)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  store Store @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@unique([storeId, city, state, neighborhood])
+  @@map("delivery_areas")
+}
