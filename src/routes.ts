@@ -5,6 +5,9 @@ import { CreateUserSchema } from "./schema/userSchema.js";
 import { AuthUserController } from "./controllers/user/AuthUserController.js";
 import { isAuthenticated } from "./middlewares/isAuthenticated.js";
 import { DetailUserController } from "./controllers/user/DetailUserController.js";
+import { CreateStoreController } from "./controllers/stores/CreateStoreController.js";
+import { CreateStoreSchema } from "./schema/storeSchema.js";
+import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
 
 const router = Router();
 
@@ -25,5 +28,13 @@ router.post(
 );
 
 router.post("/session", new AuthUserController().handle);
+
+router.post(
+  "/stores",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(CreateStoreSchema),
+  new CreateStoreController().handle,
+);
 
 export default router;
