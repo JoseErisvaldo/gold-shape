@@ -7,9 +7,11 @@ import { isAuthenticated } from "./middlewares/isAuthenticated.js";
 import { DetailUserController } from "./controllers/user/DetailUserController.js";
 import { CreateStoreController } from "./controllers/stores/CreateStoreController.js";
 import { CreateStoreSchema, UpdateStoreSchema } from "./schema/storeSchema.js";
+import { CreateCategorySchema } from "./schema/categorySchema.js";
 import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
 import { ListStoresController } from "./controllers/stores/ListStoresController.js";
 import { UpdateStoreController } from "./controllers/stores/UpdateStoreController.js";
+import { CreateCategoryController } from "./controllers/category/CreateCategoryController.js";
 
 const router = Router();
 
@@ -47,6 +49,13 @@ router.patch(
   isAdminOrModerator,
   validateSchema(UpdateStoreSchema),
   new UpdateStoreController().handle,
+);
+
+router.post(
+  "/categories",
+  isAuthenticated,
+  validateSchema(CreateCategorySchema),
+  new CreateCategoryController().handle,
 );
 
 export default router;

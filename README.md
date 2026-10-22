@@ -41,13 +41,13 @@
 
 - [x] `POST /stores` — Criar loja
 - [x] `GET /stores` — Listar lojas
-- [ ] `PATCH /stores/:id` — Atualizar loja
+- [x] `PATCH /stores/:id` — Atualizar loja
 
 ---
 
 ## 3. Categorias (`categories`)
 
-- [ ] `POST /categories` — Criar categoria
+- [x] `POST /categories` — Criar categoria
 - [ ] `GET /categories` — Listar categorias
 - [ ] `GET /categories/:id` — Buscar categoria por ID
 - [ ] `PATCH /categories/:id` — Atualizar categoria
