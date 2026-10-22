@@ -8,6 +8,7 @@ import { DetailUserController } from "./controllers/user/DetailUserController.js
 import { CreateStoreController } from "./controllers/stores/CreateStoreController.js";
 import { CreateStoreSchema } from "./schema/storeSchema.js";
 import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
+import { ListStoresController } from "./controllers/stores/ListStoresController.js";
 
 const router = Router();
 
@@ -36,5 +37,7 @@ router.post(
   validateSchema(CreateStoreSchema),
   new CreateStoreController().handle,
 );
+
+router.get("/stores", isAuthenticated, new ListStoresController().handle);
 
 export default router;
