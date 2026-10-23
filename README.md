@@ -74,8 +74,7 @@
 ## 6. Variações dos Produtos (`product_variants`)
 
 - [x] `POST /products/:productId/variants` — Criar variação
-- [ ] `GET /products/:productId/variants` — Listar variações do produto
-- [ ] `GET /products/:productId/variants/:variantId` — Buscar variação por ID
+- [x] `GET /products/:productId/variants` — Listar variações do produto
 - [ ] `PATCH /products/:productId/variants/:variantId` — Atualizar variação
 - [ ] `DELETE /products/:productId/variants/:variantId` — Excluir variação
 - [ ] Definir preço por variação

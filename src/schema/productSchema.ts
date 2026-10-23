@@ -111,3 +111,13 @@ export type CreateProductVariantParams = z.infer<
 export type CreateProductVariantInput = z.infer<
   typeof CreateProductVariantSchema
 >["body"];
+
+export const ListProductVariantsSchema = z.object({
+  params: z.object({
+    productId: z.string().uuid(),
+  }),
+});
+
+export type ListProductVariantsParams = z.infer<
+  typeof ListProductVariantsSchema
+>["params"];

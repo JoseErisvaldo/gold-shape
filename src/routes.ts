@@ -23,6 +23,7 @@ import {
   CreateProductSchema,
   CreateProductVariantSchema,
   ListProductsSchema,
+  ListProductVariantsSchema,
   UpdateProductCategoriesSchema,
   UpdateProductSchema,
 } from "./schema/productSchema.js";
@@ -30,6 +31,7 @@ import { ListProductsController } from "./controllers/product/ListProductsContro
 import { UpdateProductController } from "./controllers/product/UpdateProductController.js";
 import { UpdateProductCategoriesController } from "./controllers/product/UpdateProductCategoriesController.js";
 import { CreateProductVariantController } from "./controllers/product/CreateProductVariantController.js";
+import { ListProductVariantsController } from "./controllers/product/ListProductVariantsController.js";
 
 const router = Router();
 
@@ -129,6 +131,12 @@ router.post(
   isAdminOrModerator,
   validateSchema(CreateProductVariantSchema),
   new CreateProductVariantController().handle,
+);
+
+router.get(
+  "/products/:productId/variants",
+  validateSchema(ListProductVariantsSchema),
+  new ListProductVariantsController().handle,
 );
 
 export default router;
