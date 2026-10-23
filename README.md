@@ -49,9 +49,7 @@
 
 - [x] `POST /categories` — Criar categoria
 - [x] `GET /categories` — Listar categorias
-- [ ] `GET /categories/:id` — Buscar categoria por ID
-- [ ] `PATCH /categories/:id` — Atualizar categoria
-- [ ] `DELETE /categories/:id` — Excluir categoria
+- [x] `PATCH /categories/:id` — Atualizar categoria
 
 ---
 
