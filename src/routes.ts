@@ -12,6 +12,7 @@ import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
 import { ListStoresController } from "./controllers/stores/ListStoresController.js";
 import { UpdateStoreController } from "./controllers/stores/UpdateStoreController.js";
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController.js";
+import { ListCategoriesController } from "./controllers/category/ListCategoriesController.js";
 
 const router = Router();
 
@@ -56,6 +57,12 @@ router.post(
   isAuthenticated,
   validateSchema(CreateCategorySchema),
   new CreateCategoryController().handle,
+);
+
+router.get(
+  "/categories",
+  isAuthenticated,
+  new ListCategoriesController().handle,
 );
 
 export default router;
