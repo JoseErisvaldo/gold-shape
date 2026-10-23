@@ -96,3 +96,57 @@ export type UpdateProductCategoriesParams = z.infer<
 export type UpdateProductCategoriesInput = z.infer<
   typeof UpdateProductCategoriesSchema
 >["body"];
+
+export const CreateProductVariantSchema = z.object({
+  params: z.object({
+    productId: z.string().uuid(),
+  }),
+  body: ProductVariantSchema,
+});
+
+export type CreateProductVariantParams = z.infer<
+  typeof CreateProductVariantSchema
+>["params"];
+
+export type CreateProductVariantInput = z.infer<
+  typeof CreateProductVariantSchema
+>["body"];
+
+export const ListProductVariantsSchema = z.object({
+  params: z.object({
+    productId: z.string().uuid(),
+  }),
+});
+
+export type ListProductVariantsParams = z.infer<
+  typeof ListProductVariantsSchema
+>["params"];
+
+export const UpdateProductVariantSchema = z.object({
+  params: z.object({
+    productId: z.string().uuid(),
+    variantId: z.string().uuid(),
+  }),
+  body: z
+    .object({
+      sku: z.string().trim().min(1).max(80).optional(),
+      size: z.string().trim().max(80).nullable().optional(),
+      flavor: z.string().trim().max(100).nullable().optional(),
+      price: z.number().positive().optional(),
+      discountPercentage: z.number().min(0).max(100).nullable().optional(),
+      stockQuantity: z.number().int().min(0).nullable().optional(),
+      active: z.boolean().optional(),
+    })
+    .strict()
+    .refine((data) => Object.keys(data).length > 0, {
+      message: "Informe pelo menos um campo para atualizar",
+    }),
+});
+
+export type UpdateProductVariantParams = z.infer<
+  typeof UpdateProductVariantSchema
+>["params"];
+
+export type UpdateProductVariantInput = z.infer<
+  typeof UpdateProductVariantSchema
+>["body"];
