@@ -55,7 +55,7 @@
 
 ## 4. Produtos (`products`)
 
-- [ ] `POST /products` — Criar produto
+- [x] `POST /products` — Criar produto
 - [ ] `GET /products` — Listar produtos
 - [ ] `GET /products/:id` — Buscar produto por ID
 - [ ] `PATCH /products/:id` — Atualizar produto

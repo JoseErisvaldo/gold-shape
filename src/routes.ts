@@ -17,6 +17,8 @@ import { ListStoresController } from "./controllers/stores/ListStoresController.
 import { UpdateStoreController } from "./controllers/stores/UpdateStoreController.js";
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController.js";
 import { ListCategoriesController } from "./controllers/category/ListCategoriesController.js";
+import { CreateProductController } from "./controllers/product/CreateProductController.js";
+import { CreateProductSchema } from "./schema/productSchema.js";
 
 const router = Router();
 
@@ -59,6 +61,7 @@ router.patch(
 router.post(
   "/categories",
   isAuthenticated,
+  isAdminOrModerator,
   validateSchema(CreateCategorySchema),
   new CreateCategoryController().handle,
 );
@@ -72,8 +75,17 @@ router.get(
 router.patch(
   "/categories/:id",
   isAuthenticated,
+  isAdminOrModerator,
   validateSchema(UpdateCategorySchema),
   new UpdateCategoryController().handle,
+);
+
+router.post(
+  "/products",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(CreateProductSchema),
+  new CreateProductController().handle,
 );
 
 export default router;
