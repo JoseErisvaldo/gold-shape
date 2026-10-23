@@ -40,6 +40,12 @@ import {
   ListDeliveryAreasSchema,
 } from "./schema/deliveryAreaSchema.js";
 import { ListDeliveryAreasController } from "./controllers/deliveryArea/ListDeliveryAreasController.js";
+import { DetailPublicDeliveryAreaController } from "./controllers/deliveryArea/DetailPublicDeliveryAreaController.js";
+import {
+  DetailPublicDeliveryAreaSchema,
+  SearchPublicDeliveryAreasSchema,
+} from "./schema/publicDeliveryAreaSchema.js";
+import { SearchPublicDeliveryAreasController } from "./controllers/deliveryArea/SearchPublicDeliveryAreasController.js";
 
 const router = Router();
 
@@ -169,6 +175,18 @@ router.get(
   isAdminOrModerator,
   validateSchema(ListDeliveryAreasSchema),
   new ListDeliveryAreasController().handle,
+);
+
+router.get(
+  "/public/delivery-areas",
+  validateSchema(SearchPublicDeliveryAreasSchema),
+  new SearchPublicDeliveryAreasController().handle,
+);
+
+router.get(
+  "/public/delivery-areas/:id",
+  validateSchema(DetailPublicDeliveryAreaSchema),
+  new DetailPublicDeliveryAreaController().handle,
 );
 
 export default router;
