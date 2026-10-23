@@ -67,9 +67,7 @@
 
 ## 5. Categorias dos Produtos (`product_categories`)
 
-- [ ] `PUT /products/:productId/categories` — Definir categorias do produto
-- [ ] `POST /products/:productId/categories/:categoryId` — Vincular categoria
-- [ ] `DELETE /products/:productId/categories/:categoryId` — Remover categoria do produto
+- [x] `PUT /products/:productId/categories` — Definir categorias do produto
 
 ---
 
