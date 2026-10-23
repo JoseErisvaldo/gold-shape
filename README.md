@@ -58,9 +58,7 @@
 - [x] `POST /products` — Criar produto
 - [x] `GET /products` — Listar produtos
 - [x] `GET /products/:id` — Buscar produto por ID
-- [ ] `PATCH /products/:id` — Atualizar produto
-- [ ] `DELETE /products/:id` — Excluir produto
-- [ ] `GET /products/slug/:slug` — Buscar produto pelo slug
+- [x] `PATCH /products/:id` — Atualizar produto
 - [x] Implementar pesquisa por nome
 - [x] Implementar filtros por categoria
 - [x] Implementar paginação e ordenação cursor
