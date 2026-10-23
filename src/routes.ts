@@ -34,6 +34,8 @@ import { UpdateProductCategoriesController } from "./controllers/product/UpdateP
 import { CreateProductVariantController } from "./controllers/product/CreateProductVariantController.js";
 import { ListProductVariantsController } from "./controllers/product/ListProductVariantsController.js";
 import { UpdateProductVariantController } from "./controllers/product/UpdateProductVariantController.js";
+import { CreateDeliveryAreaController } from "./controllers/deliveryArea/CreateDeliveryAreaController.js";
+import { CreateDeliveryAreaSchema } from "./schema/deliveryAreaSchema.js";
 
 const router = Router();
 
@@ -147,6 +149,14 @@ router.patch(
   isAdminOrModerator,
   validateSchema(UpdateProductVariantSchema),
   new UpdateProductVariantController().handle,
+);
+
+router.post(
+  "/delivery-areas",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(CreateDeliveryAreaSchema),
+  new CreateDeliveryAreaController().handle,
 );
 
 export default router;
