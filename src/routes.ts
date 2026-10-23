@@ -12,11 +12,20 @@ import {
   CreateCategorySchema,
   UpdateCategorySchema,
 } from "./schema/categorySchema.js";
+import { DetailProductController } from "./controllers/product/DetailProductController.js";
 import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
 import { ListStoresController } from "./controllers/stores/ListStoresController.js";
 import { UpdateStoreController } from "./controllers/stores/UpdateStoreController.js";
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController.js";
 import { ListCategoriesController } from "./controllers/category/ListCategoriesController.js";
+import { CreateProductController } from "./controllers/product/CreateProductController.js";
+import {
+  CreateProductSchema,
+  ListProductsSchema,
+  UpdateProductSchema,
+} from "./schema/productSchema.js";
+import { ListProductsController } from "./controllers/product/ListProductsController.js";
+import { UpdateProductController } from "./controllers/product/UpdateProductController.js";
 
 const router = Router();
 
@@ -59,6 +68,7 @@ router.patch(
 router.post(
   "/categories",
   isAuthenticated,
+  isAdminOrModerator,
   validateSchema(CreateCategorySchema),
   new CreateCategoryController().handle,
 );
@@ -72,8 +82,33 @@ router.get(
 router.patch(
   "/categories/:id",
   isAuthenticated,
+  isAdminOrModerator,
   validateSchema(UpdateCategorySchema),
   new UpdateCategoryController().handle,
+);
+
+router.post(
+  "/products",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(CreateProductSchema),
+  new CreateProductController().handle,
+);
+
+router.get(
+  "/products",
+  validateSchema(ListProductsSchema),
+  new ListProductsController().handle,
+);
+
+router.get("/products/:id", new DetailProductController().handle);
+
+router.patch(
+  "/products/:id",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(UpdateProductSchema),
+  new UpdateProductController().handle,
 );
 
 export default router;
