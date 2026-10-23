@@ -12,6 +12,7 @@ import {
   CreateCategorySchema,
   UpdateCategorySchema,
 } from "./schema/categorySchema.js";
+import { DetailProductController } from "./controllers/product/DetailProductController.js";
 import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
 import { ListStoresController } from "./controllers/stores/ListStoresController.js";
 import { UpdateStoreController } from "./controllers/stores/UpdateStoreController.js";
@@ -94,8 +95,10 @@ router.post(
 
 router.get(
   "/products",
-  isAuthenticated,
   validateSchema(ListProductsSchema),
   new ListProductsController().handle,
 );
+
+router.get("/products/:id", new DetailProductController().handle);
+
 export default router;

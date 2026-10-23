@@ -57,7 +57,7 @@
 
 - [x] `POST /products` — Criar produto
 - [x] `GET /products` — Listar produtos
-- [ ] `GET /products/:id` — Buscar produto por ID
+- [x] `GET /products/:id` — Buscar produto por ID
 - [ ] `PATCH /products/:id` — Atualizar produto
 - [ ] `DELETE /products/:id` — Excluir produto
 - [ ] `GET /products/slug/:slug` — Buscar produto pelo slug
