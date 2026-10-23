@@ -76,11 +76,6 @@
 - [x] `POST /products/:productId/variants` — Criar variação
 - [x] `GET /products/:productId/variants` — Listar variações do produto
 - [x] `PATCH /products/:productId/variants/:variantId` — Atualizar variação
-- [ ] `DELETE /products/:productId/variants/:variantId` — Excluir variação
-- [ ] Definir preço por variação
-- [ ] Definir estoque por variação
-- [ ] Definir SKU por variação
-- [ ] Controlar disponibilidade por variação
 
 ---
 
