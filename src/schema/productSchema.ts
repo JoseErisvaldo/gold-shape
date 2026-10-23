@@ -96,3 +96,18 @@ export type UpdateProductCategoriesParams = z.infer<
 export type UpdateProductCategoriesInput = z.infer<
   typeof UpdateProductCategoriesSchema
 >["body"];
+
+export const CreateProductVariantSchema = z.object({
+  params: z.object({
+    productId: z.string().uuid(),
+  }),
+  body: ProductVariantSchema,
+});
+
+export type CreateProductVariantParams = z.infer<
+  typeof CreateProductVariantSchema
+>["params"];
+
+export type CreateProductVariantInput = z.infer<
+  typeof CreateProductVariantSchema
+>["body"];
