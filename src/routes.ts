@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { UpdateCategoryController } from "./controllers/category/UpdateCategoryController.js";
 import { CreateUserController } from "./controllers/user/CreateUserController.js";
 import { validateSchema } from "./middlewares/validateSchema.js";
 import { CreateUserSchema } from "./schema/userSchema.js";
@@ -7,9 +8,15 @@ import { isAuthenticated } from "./middlewares/isAuthenticated.js";
 import { DetailUserController } from "./controllers/user/DetailUserController.js";
 import { CreateStoreController } from "./controllers/stores/CreateStoreController.js";
 import { CreateStoreSchema, UpdateStoreSchema } from "./schema/storeSchema.js";
+import {
+  CreateCategorySchema,
+  UpdateCategorySchema,
+} from "./schema/categorySchema.js";
 import { isAdminOrModerator } from "./middlewares/isAdminOrModerator.js";
 import { ListStoresController } from "./controllers/stores/ListStoresController.js";
 import { UpdateStoreController } from "./controllers/stores/UpdateStoreController.js";
+import { CreateCategoryController } from "./controllers/category/CreateCategoryController.js";
+import { ListCategoriesController } from "./controllers/category/ListCategoriesController.js";
 
 const router = Router();
 
@@ -47,6 +54,26 @@ router.patch(
   isAdminOrModerator,
   validateSchema(UpdateStoreSchema),
   new UpdateStoreController().handle,
+);
+
+router.post(
+  "/categories",
+  isAuthenticated,
+  validateSchema(CreateCategorySchema),
+  new CreateCategoryController().handle,
+);
+
+router.get(
+  "/categories",
+  isAuthenticated,
+  new ListCategoriesController().handle,
+);
+
+router.patch(
+  "/categories/:id",
+  isAuthenticated,
+  validateSchema(UpdateCategorySchema),
+  new UpdateCategoryController().handle,
 );
 
 export default router;
