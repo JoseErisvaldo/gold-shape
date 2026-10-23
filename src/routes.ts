@@ -22,10 +22,12 @@ import { CreateProductController } from "./controllers/product/CreateProductCont
 import {
   CreateProductSchema,
   ListProductsSchema,
+  UpdateProductCategoriesSchema,
   UpdateProductSchema,
 } from "./schema/productSchema.js";
 import { ListProductsController } from "./controllers/product/ListProductsController.js";
 import { UpdateProductController } from "./controllers/product/UpdateProductController.js";
+import { UpdateProductCategoriesController } from "./controllers/product/UpdateProductCategoriesController.js";
 
 const router = Router();
 
@@ -109,6 +111,14 @@ router.patch(
   isAdminOrModerator,
   validateSchema(UpdateProductSchema),
   new UpdateProductController().handle,
+);
+
+router.put(
+  "/products/:productId/categories",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(UpdateProductCategoriesSchema),
+  new UpdateProductCategoriesController().handle,
 );
 
 export default router;

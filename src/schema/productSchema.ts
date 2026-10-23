@@ -73,3 +73,26 @@ export const UpdateProductSchema = z.object({
 export type UpdateProductParams = z.infer<typeof UpdateProductSchema>["params"];
 
 export type UpdateProductInput = z.infer<typeof UpdateProductSchema>["body"];
+
+export const UpdateProductCategoriesSchema = z.object({
+  params: z.object({
+    productId: z.string().uuid(),
+  }),
+  body: z
+    .object({
+      categoryIds: z
+        .array(z.string().uuid())
+        .refine((ids) => new Set(ids).size === ids.length, {
+          message: "Não pode haver categorias duplicadas",
+        }),
+    })
+    .strict(),
+});
+
+export type UpdateProductCategoriesParams = z.infer<
+  typeof UpdateProductCategoriesSchema
+>["params"];
+
+export type UpdateProductCategoriesInput = z.infer<
+  typeof UpdateProductCategoriesSchema
+>["body"];
