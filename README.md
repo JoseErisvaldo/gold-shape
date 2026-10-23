@@ -56,15 +56,14 @@
 ## 4. Produtos (`products`)
 
 - [x] `POST /products` — Criar produto
-- [ ] `GET /products` — Listar produtos
+- [x] `GET /products` — Listar produtos
 - [ ] `GET /products/:id` — Buscar produto por ID
 - [ ] `PATCH /products/:id` — Atualizar produto
 - [ ] `DELETE /products/:id` — Excluir produto
 - [ ] `GET /products/slug/:slug` — Buscar produto pelo slug
-- [ ] Implementar pesquisa por nome
-- [ ] Implementar filtros por categoria e loja
-- [ ] Implementar filtros por preço e disponibilidade
-- [ ] Implementar paginação e ordenação
+- [x] Implementar pesquisa por nome
+- [x] Implementar filtros por categoria
+- [x] Implementar paginação e ordenação cursor
 
 ---
 

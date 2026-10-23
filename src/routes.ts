@@ -18,7 +18,11 @@ import { UpdateStoreController } from "./controllers/stores/UpdateStoreControlle
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController.js";
 import { ListCategoriesController } from "./controllers/category/ListCategoriesController.js";
 import { CreateProductController } from "./controllers/product/CreateProductController.js";
-import { CreateProductSchema } from "./schema/productSchema.js";
+import {
+  CreateProductSchema,
+  ListProductsSchema,
+} from "./schema/productSchema.js";
+import { ListProductsController } from "./controllers/product/ListProductsController.js";
 
 const router = Router();
 
@@ -88,4 +92,10 @@ router.post(
   new CreateProductController().handle,
 );
 
+router.get(
+  "/products",
+  isAuthenticated,
+  validateSchema(ListProductsSchema),
+  new ListProductsController().handle,
+);
 export default router;
