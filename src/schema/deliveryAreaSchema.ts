@@ -32,3 +32,34 @@ export const ListDeliveryAreasSchema = z.object({
 export type ListDeliveryAreasQuery = z.infer<
   typeof ListDeliveryAreasSchema
 >["query"];
+
+export const UpdateDeliveryAreaSchema = z.object({
+  params: z.object({
+    id: z.string().uuid(),
+  }),
+  body: z
+    .object({
+      city: z.string().trim().min(1).max(120).optional(),
+      state: z
+        .string()
+        .trim()
+        .length(2)
+        .transform((value) => value.toUpperCase())
+        .optional(),
+      neighborhood: z.string().trim().min(1).max(120).optional(),
+      shippingFee: z.number().min(0).optional(),
+      active: z.boolean().optional(),
+    })
+    .strict()
+    .refine((data) => Object.keys(data).length > 0, {
+      message: "Informe pelo menos um campo para atualizar",
+    }),
+});
+
+export type UpdateDeliveryAreaParams = z.infer<
+  typeof UpdateDeliveryAreaSchema
+>["params"];
+
+export type UpdateDeliveryAreaInput = z.infer<
+  typeof UpdateDeliveryAreaSchema
+>["body"];
