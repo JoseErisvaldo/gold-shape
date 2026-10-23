@@ -34,6 +34,20 @@ import { UpdateProductCategoriesController } from "./controllers/product/UpdateP
 import { CreateProductVariantController } from "./controllers/product/CreateProductVariantController.js";
 import { ListProductVariantsController } from "./controllers/product/ListProductVariantsController.js";
 import { UpdateProductVariantController } from "./controllers/product/UpdateProductVariantController.js";
+import { CreateDeliveryAreaController } from "./controllers/deliveryArea/CreateDeliveryAreaController.js";
+import {
+  CreateDeliveryAreaSchema,
+  ListDeliveryAreasSchema,
+  UpdateDeliveryAreaSchema,
+} from "./schema/deliveryAreaSchema.js";
+import { ListDeliveryAreasController } from "./controllers/deliveryArea/ListDeliveryAreasController.js";
+import { DetailPublicDeliveryAreaController } from "./controllers/deliveryArea/DetailPublicDeliveryAreaController.js";
+import {
+  DetailPublicDeliveryAreaSchema,
+  SearchPublicDeliveryAreasSchema,
+} from "./schema/publicDeliveryAreaSchema.js";
+import { SearchPublicDeliveryAreasController } from "./controllers/deliveryArea/SearchPublicDeliveryAreasController.js";
+import { UpdateDeliveryAreaController } from "./controllers/deliveryArea/UpdateDeliveryAreaController.js";
 
 const router = Router();
 
@@ -147,6 +161,42 @@ router.patch(
   isAdminOrModerator,
   validateSchema(UpdateProductVariantSchema),
   new UpdateProductVariantController().handle,
+);
+
+router.post(
+  "/delivery-areas",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(CreateDeliveryAreaSchema),
+  new CreateDeliveryAreaController().handle,
+);
+
+router.get(
+  "/delivery-areas",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(ListDeliveryAreasSchema),
+  new ListDeliveryAreasController().handle,
+);
+
+router.get(
+  "/public/delivery-areas",
+  validateSchema(SearchPublicDeliveryAreasSchema),
+  new SearchPublicDeliveryAreasController().handle,
+);
+
+router.get(
+  "/public/delivery-areas/:id",
+  validateSchema(DetailPublicDeliveryAreaSchema),
+  new DetailPublicDeliveryAreaController().handle,
+);
+
+router.patch(
+  "/delivery-areas/:id",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(UpdateDeliveryAreaSchema),
+  new UpdateDeliveryAreaController().handle,
 );
 
 export default router;

@@ -81,11 +81,10 @@
 
 ## 7. Áreas de Entrega (`delivery_areas`)
 
-- [ ] `POST /delivery-areas` — Criar área de entrega
-- [ ] `GET /delivery-areas` — Listar áreas de entrega
-- [ ] `GET /delivery-areas/:id` — Buscar área por ID
-- [ ] `PATCH /delivery-areas/:id` — Atualizar área de entrega
-- [ ] `DELETE /delivery-areas/:id` — Excluir área de entrega
-- [ ] Filtrar áreas por loja
+- [x] `POST /delivery-areas` — Criar área de entrega
+- [x] `GET /delivery-areas` — Listar áreas de entrega
+- [x] `GET /public/delivery-areas` — Listar áreas públicas de entrega
+- [x] `GET /public/delivery-areas/:id` — Detalhar área pública de entrega
+- [x] `PATCH /delivery-areas/:id` — Atualizar área de entrega
 
 ---
