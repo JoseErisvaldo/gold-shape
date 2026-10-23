@@ -26,12 +26,14 @@ import {
   ListProductVariantsSchema,
   UpdateProductCategoriesSchema,
   UpdateProductSchema,
+  UpdateProductVariantSchema,
 } from "./schema/productSchema.js";
 import { ListProductsController } from "./controllers/product/ListProductsController.js";
 import { UpdateProductController } from "./controllers/product/UpdateProductController.js";
 import { UpdateProductCategoriesController } from "./controllers/product/UpdateProductCategoriesController.js";
 import { CreateProductVariantController } from "./controllers/product/CreateProductVariantController.js";
 import { ListProductVariantsController } from "./controllers/product/ListProductVariantsController.js";
+import { UpdateProductVariantController } from "./controllers/product/UpdateProductVariantController.js";
 
 const router = Router();
 
@@ -137,6 +139,14 @@ router.get(
   "/products/:productId/variants",
   validateSchema(ListProductVariantsSchema),
   new ListProductVariantsController().handle,
+);
+
+router.patch(
+  "/products/:productId/variants/:variantId",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(UpdateProductVariantSchema),
+  new UpdateProductVariantController().handle,
 );
 
 export default router;
