@@ -35,7 +35,11 @@ import { CreateProductVariantController } from "./controllers/product/CreateProd
 import { ListProductVariantsController } from "./controllers/product/ListProductVariantsController.js";
 import { UpdateProductVariantController } from "./controllers/product/UpdateProductVariantController.js";
 import { CreateDeliveryAreaController } from "./controllers/deliveryArea/CreateDeliveryAreaController.js";
-import { CreateDeliveryAreaSchema } from "./schema/deliveryAreaSchema.js";
+import {
+  CreateDeliveryAreaSchema,
+  ListDeliveryAreasSchema,
+} from "./schema/deliveryAreaSchema.js";
+import { ListDeliveryAreasController } from "./controllers/deliveryArea/ListDeliveryAreasController.js";
 
 const router = Router();
 
@@ -157,6 +161,14 @@ router.post(
   isAdminOrModerator,
   validateSchema(CreateDeliveryAreaSchema),
   new CreateDeliveryAreaController().handle,
+);
+
+router.get(
+  "/delivery-areas",
+  isAuthenticated,
+  isAdminOrModerator,
+  validateSchema(ListDeliveryAreasSchema),
+  new ListDeliveryAreasController().handle,
 );
 
 export default router;
